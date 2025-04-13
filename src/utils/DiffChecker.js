@@ -45,7 +45,7 @@ export default class DiffChecker {
         }
         this.lcs = result.reverse();
         */
-        
+
         const indexes = new Set();
         const result = [];
         for (let i = 0; i < m; i++) {
@@ -79,9 +79,9 @@ export default class DiffChecker {
         let auxIdx = 0, c = 0;
 
         for (let i = 0; i < base.length; i++) {
-            if (lcsCopy.length > 0 && lcsCopy[0] === base[i]) {
-                lcsCopy.shift();
-                
+            const iLcs = lcsCopy.indexOf(base[i]);
+            if (iLcs !== -1) {
+                lcsCopy.splice(iLcs, 1);
                 const n = this.getInBetween(auxIdx, base[i], cmp);
                 auxIdx += n + 1;
 
