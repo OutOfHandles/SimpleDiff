@@ -13,6 +13,7 @@ export default class DiffChecker {
         const m = this.original.length;
         const n = this.modified.length;
 
+        /*
         const LCSTable = new Array(m + 1).fill(null).map(() => new Array(n + 1));
 
         for (let i = 0; i <= m; i++) {
@@ -42,8 +43,22 @@ export default class DiffChecker {
             else
                 j--;
         }
-
         this.lcs = result.reverse();
+        */
+        
+        const indexes = new Set();
+        const result = [];
+        for (let i = 0; i < m; i++) {
+            for (let j = 0; j < n; j++) {
+                if (this.original[i] === this.modified[j] && !indexes.has(j)) {
+                    indexes.add(j);
+                    result.push(this.original[i]);
+                    break;
+                }
+            }
+        }
+
+        this.lcs = result;
     }
 
     getInBetween(from, str, array) {
